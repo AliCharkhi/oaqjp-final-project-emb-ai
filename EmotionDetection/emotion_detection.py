@@ -8,7 +8,17 @@ def emotion_detector(text_to_analyze):
 
     response = requests.post(URL, json=MYOBJ, headers=HEADER)
 
-    if response.status_code == 500:
+    if response.status_code == 400:
+        return {
+          'anger': None,
+          'disgust': None,
+          'fear': None,
+          'joy': None,
+          'sadness': None,
+          'dominant_emotion': None  
+        }
+
+    elif response.status_code == 500:
         return {"error": "Server Error"}
 
     response_json = json.loads(response.text)

@@ -10,6 +10,9 @@ def emotion_analyzer():
     # Pass the text to the sentiment_analyzer function and store the response
     response = emotion_detector(text_to_analyze)
     # Extract the label and score from the response
+    
+    if response['dominant']
+    
     result = (
         f"For the given statement, the system response is "
         f"'anger': {response['anger']}, 'disgust': {response['disgust']}, "
