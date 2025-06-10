@@ -1,18 +1,24 @@
-from flask import Flask, render_template, request, jsonify
+"""
+This is the flask application used for emotion detection of provided text.
+"""
+from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
 @app.route("/emotionDetector")
 def emotion_analyzer():
+    """
+    This function gets the input text from the HTML interface and analyzes 
+    the emotion of the provided text and results will be shown in specific format.
+    """
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
     # Pass the text to the sentiment_analyzer function and store the response
     response = emotion_detector(text_to_analyze)
     # Extract the label and score from the response
-    
-    if response['dominant']
-    
+    if response['dominant_emotion'] is None:
+        return 'Invalid text! Please try again!'
     result = (
         f"For the given statement, the system response is "
         f"'anger': {response['anger']}, 'disgust': {response['disgust']}, "
@@ -24,6 +30,9 @@ def emotion_analyzer():
 
 @app.route("/")
 def render_index_page():
+    """
+    This function renders the landing page of the application.
+    """
     return render_template('index.html')
 
 if __name__ == "__main__":
